@@ -1,0 +1,439 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;500&display=swap');
+
+:root {
+  --primary-color: #3b82f6;
+  --primary-hover: #2563eb;
+  --primary-gradient: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+  --secondary-gradient: linear-gradient(135deg, #6B73FF 0%, #000DFF 100%);
+  --surface-light: rgba(255, 255, 255, 0.8);
+  --surface-dark: rgba(17, 24, 39, 0.8);
+  --tile-blue: #2672EC;
+  --tile-green: #00A300;
+  --tile-purple: #8C0095;
+  --tile-orange: #D24726;
+  --tile-cyan: #0099AB;
+  --tile-magenta: #FF0097;
+  --tile-teal: #00ABA9;
+  --tile-lime: #8CBE29;
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background-attachment: fixed;
+  background-image: url('https://images.unsplash.com/photo-1534088568595-a066f410bcda?auto=format&fit=crop&q=80');
+  background-size: cover;
+  background-position: center;
+  overflow-y: auto;
+  color: #1a1a1a;
+  background: #f0f0f0;
+  overflow-x: hidden;
+}
+
+.dark {
+  color-scheme: dark;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.dark body {
+  background-image: url('https://images.unsplash.com/photo-1505322022379-7c3353ee6291?auto=format&fit=crop&q=80');
+  color: rgba(255, 255, 255, 0.9);
+  background: #202020;
+  color: #ffffff;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+/* Custom styles for weather cards */
+.weather-card {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.weather-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--primary-gradient);
+  opacity: 0.05;
+  z-index: 0;
+}
+
+.dark .weather-card::before {
+  opacity: 0.1;
+}
+
+.weather-icon {
+  transition: all 0.3s cubic-bezier(0.1, 0.9, 0.2, 1);
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+}
+
+.weather-icon:hover {
+  transform: scale(1.15) rotate(5deg);
+  filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.5));
+}
+
+/* Improved dark mode styles */
+.dark body {
+  @apply bg-gray-900;
+}
+
+/* Dark mode text colors */
+.dark .glass {
+  background: var(--surface-dark);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.dark .search-input {
+  background: rgba(17, 24, 39, 0.8);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.dark .text-gray-500 {
+  color: rgba(209, 213, 219, 0.9);
+}
+
+.dark .text-gray-600 {
+  color: rgba(209, 213, 219, 0.9);
+}
+
+/* Custom animations */
+@keyframes fadeIn {
+  from { 
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+  }
+}
+
+@keyframes tileHover {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.02); }
+}
+
+@keyframes tilePress {
+  0% { transform: scale(1.02); }
+  100% { transform: scale(0.98); }
+}
+
+@keyframes metroSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes metro-spin {
+  to { transform: rotate(360deg); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Glass morphism effects */
+.glass {
+  background: var(--surface-light);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+}
+
+.dark .glass {
+  background: var(--surface-dark);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Temperature Display */
+.temp-display {
+  @apply font-bold relative;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Search Input Styles */
+.search-input {
+  background: var(--surface-light);
+  transition: all 0.3s ease;
+}
+
+.dark .search-input {
+  background: var(--surface-dark);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.search-input:focus {
+  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.25);
+  transform: translateY(-1px);
+}
+
+/* Forecast Card Hover Effects */
+.forecast-card {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.forecast-card:hover {
+  transform: translateY(-5px) rotateX(5deg);
+  box-shadow: 0 12px 24px -8px rgba(59, 130, 246, 0.15);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Loading Animation */
+.loading-spinner {
+  animation: spin 1s linear infinite;
+  background: conic-gradient(from 0deg, #3b82f6, #60a5fa, #93c5fd, #3b82f6);
+  mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 0);
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 0);
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  animation: metro-spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Sticky sidebar for recent searches */
+.sticky {
+  position: sticky;
+  top: 1.5rem;
+  max-height: calc(100vh - 3rem);
+  overflow-y: auto;
+}
+
+/* Improved scrollbar for recent searches */
+.sticky::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sticky::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sticky::-webkit-scrollbar-thumb {
+  background: rgba(59, 130, 246, 0.3);
+  border-radius: 3px;
+}
+
+.dark .sticky::-webkit-scrollbar-thumb {
+  background: rgba(96, 165, 250, 0.2);
+}
+
+/* Scale hover effect fix */
+.hover\:scale-102:hover {
+  transform: scale(1.02);
+}
+
+/* Theme transition */
+.transition-theme {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Metro UI Tile Effects */
+.metro-tile {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.1, 0.9, 0.2, 1);
+  cursor: default;
+}
+
+.metro-tile::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-100%);
+  transition: transform 0.3s cubic-bezier(0.1, 0.9, 0.2, 1);
+}
+
+.metro-tile:hover::before {
+  transform: translateY(0);
+}
+
+.metro-tile:hover {
+  animation: tileHover 0.3s forwards;
+}
+
+.metro-tile:active {
+  animation: tilePress 0.15s forwards;
+}
+
+/* Metro UI Typography */
+.metro-title {
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: 300;
+  letter-spacing: -0.5px;
+}
+
+/* Metro UI Input Styles */
+.metro-input {
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid transparent;
+  transition: all 0.3s cubic-bezier(0.1, 0.9, 0.2, 1);
+}
+
+.metro-input:focus {
+  border-color: var(--tile-blue);
+  box-shadow: 0 0 0 2px rgba(38, 114, 236, 0.2);
+  outline: none;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.dark .metro-input {
+  background: rgba(30, 30, 30, 0.95);
+  color: white;
+}
+
+/* Metro Tile Colors */
+.tile-blue { background-color: var(--tile-blue); }
+.tile-green { background-color: var(--tile-green); }
+.tile-purple { background-color: var(--tile-purple); }
+.tile-orange { background-color: var(--tile-orange); }
+.tile-cyan { background-color: var(--tile-cyan); }
+.tile-magenta { background-color: var(--tile-magenta); }
+.tile-teal { background-color: var(--tile-teal); }
+.tile-lime { background-color: var(--tile-lime); }
+
+/* Metro Animation Classes */
+.metro-slide-up {
+  animation: metroSlideUp 0.5s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
+}
+
+/* Metro UI Card styles */
+.metro-card {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
